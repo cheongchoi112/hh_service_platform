@@ -8,6 +8,8 @@ const mustacheExpress = require('mustache-express');
 // include the model so the controller can use its functions
 const Model = require('./app.model.js');
 
+app.use(express.urlencoded({ extended: true }));
+
 // create database connection
 Model.makeConnection();
 
@@ -32,6 +34,21 @@ app.get('/', async function (req, res) {
   } catch (error) {
     console.error(error);
   }
+});
+
+// Business user signup
+app.post('/signup', async function (req, res) {
+  console.log('Received form data:', req.body);
+  const result = await Model.createBusinessUser(
+    req.body.userName,
+    req.body.password,
+    req.body.businessName,
+    req.body.phone,
+    req.body.email,
+    parseInt(req.body.price)
+  );
+
+  res.redirect('/');
 });
 
 // catch-all router case intended for static files

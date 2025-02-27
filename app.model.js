@@ -1,17 +1,29 @@
-const sqlite3 = require("sqlite3").verbose();
-const sqlite = require("sqlite");
+const sqlite3 = require('sqlite3').verbose();
+const sqlite = require('sqlite');
 
 let db;
 
 async function makeConnection() {
   db = await sqlite.open({
-    filename: "service_platform.db",
+    filename: 'service_platform.db',
     driver: sqlite3.Database,
   });
 }
 
 // Business User Signup: Creates a new business account
-async function createBusinessUser() {}
+async function createBusinessUser(userName, password, businessName, phone, email, price) {
+  const userResult = await db.run('INSERT INTO User (user_name, password) VALUES (?, ?)', [userName, password]);
+
+  const userId = userResult.lastID;
+
+  await db.run('INSERT INTO Business (business_name, phone, email, price, user_id) VALUES (?, ?, ?, ?, ?)', [
+    businessName,
+    phone,
+    email,
+    price,
+    userId,
+  ]);
+}
 
 // Business User Login: Authenticates a business user
 async function loginBusinessUser() {}
@@ -30,7 +42,7 @@ async function deleteBusinessAccount() {}
 
 // List All Businesses: Retrieves all registered businesses
 async function getAllBusinesses() {
-  const businesses = await db.all("SELECT * FROM Business");
+  const businesses = await db.all('SELECT * FROM Business');
 
   return businesses;
 }

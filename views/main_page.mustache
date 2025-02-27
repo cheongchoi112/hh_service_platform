@@ -56,6 +56,56 @@
         </div>
       </div>
     </div>
+
+    <!-- Signup form -->
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Sign Up</h3>
+          </div>
+          <div class="card-body">
+            <form action="/signup" method="post">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="userName" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="userName" name="userName" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="businessName" class="form-label">Business Name</label>
+                  <input type="text" class="form-control" id="businessName" name="businessName" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="price" class="form-label">Service Price ($)</label>
+                  <input type="number" step="1" class="form-control" id="price" name="price" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input type="text" class="form-control" id="phone" name="phone" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required />
+                </div>
+              </div>
+
+              <div>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Business listings -->
     <div class="row">
       <div class="col-12">
