@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hamilton Home Tire Change Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row my-3">
+        <div class="col-12">
+          <!-- Logo and header -->
+          <div class="d-flex justify-content-center mb-3">
+            <img
+              src="../logo.jpg"
+              alt="Tire Change Service Logo"
+              style="max-width: 100px"
+            />
+          </div>
+          <h1 class="text-center mb-4">Hamilton Home Tire Change Service</h1>
+        </div>
+      </div>
+    </div>
+        <!-- Business listings -->
+        <div class="row">
+            <div class="col-12">
+              <h2 class="mb-4">Available Tire Change Services</h2>
+            </div>
+          </div>
+          
+          <div class="row">
+            {{#businesses}}
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{business_name}}</h5>
+                  <p class="card-text">
+                    <strong><i class="fas fa-phone"></i> Phone:</strong> {{phone}}<br>
+                    <strong><i class="fas fa-envelope"></i> Email:</strong> {{email}}<br>
+                    <strong><i class="fas fa-dollar-sign"></i> Price:</strong> ${{price}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {{/businesses}}
+          </div>
+        </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
