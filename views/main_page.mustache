@@ -8,7 +8,11 @@
       rel="stylesheet"
       crossorigin="anonymous"
     />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
   </head>
   <body>
     <div class="container">
@@ -16,40 +20,65 @@
         <div class="col-12">
           <!-- Logo and header -->
           <div class="d-flex justify-content-center mb-3">
-            <img
-              src="../logo.jpg"
-              alt="Tire Change Service Logo"
-              style="max-width: 100px"
-            />
+            <img src="../logo.jpg" alt="Tire Change Service Logo" style="max-width: 100px" />
           </div>
           <h1 class="text-center mb-4">Hamilton Home Tire Change Service</h1>
+          <!-- Navigation bar -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Login </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Sign Up </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Update Profile </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Change Password </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Delete Account </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
       </div>
     </div>
-        <!-- Business listings -->
-        <div class="row">
-            <div class="col-12">
-              <h2 class="mb-4">Available Tire Change Services</h2>
-            </div>
-          </div>
-          
-          <div class="row">
-            {{#businesses}}
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">{{business_name}}</h5>
-                  <p class="card-text">
-                    <strong><i class="fas fa-phone"></i> Phone:</strong> {{phone}}<br>
-                    <strong><i class="fas fa-envelope"></i> Email:</strong> {{email}}<br>
-                    <strong><i class="fas fa-dollar-sign"></i> Price:</strong> ${{price}}
-                  </p>
-                </div>
-              </div>
-            </div>
-            {{/businesses}}
+    <!-- Business listings -->
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4">Available Tire Change Services</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      {{#businesses}}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ business_name }}</h5>
+            <p class="card-text">
+              <strong><i class="fas fa-phone"></i> Phone:</strong> {{ phone }}<br />
+              <strong><i class="fas fa-envelope"></i> Email:</strong> {{ email }}<br />
+              <strong><i class="fas fa-dollar-sign"></i> Price:</strong> ${{ price }}
+            </p>
           </div>
         </div>
+      </div>
+      {{/businesses}}
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
