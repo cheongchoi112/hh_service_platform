@@ -23,6 +23,8 @@ app.set('view engine', 'mustache');
 // files should have the extension filename.mustache
 app.set('views', __dirname + '/views');
 
+global.userId = null;
+
 app.get('/', async function (req, res) {
   console.log('GET /');
   try {
@@ -30,6 +32,7 @@ app.get('/', async function (req, res) {
 
     res.render('main_page', {
       businesses: businessArray,
+      userId: global.userId,
     });
   } catch (error) {
     console.error(error);
@@ -107,6 +110,19 @@ app.post('/signup', async function (req, res) {
   );
 
   res.redirect('/');
+});
+
+// Business user login
+app.post('/login', async function (req, res) {
+  try {
+    const user = await Model.loginBusinessUser(req.body.userName, req.body.password);
+
+    global.userId = user.user_id;
+
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // catch-all router case intended for static files

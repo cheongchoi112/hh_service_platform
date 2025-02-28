@@ -26,8 +26,14 @@ async function createBusinessUser(userName, password, businessName, phone, email
 }
 
 // Business User Login: Authenticates a business user
-async function loginBusinessUser() {}
+async function loginBusinessUser(userName, password) {
+  const user = await db.get('SELECT user_id, user_name FROM User WHERE user_name = ? AND password = ?', [
+    userName,
+    password,
+  ]);
 
+  return user;
+}
 // Business User Change Password: Updates the password in the user table
 async function changePassword() {}
 
