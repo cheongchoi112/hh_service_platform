@@ -36,6 +36,64 @@ app.get('/', async function (req, res) {
   }
 });
 
+// Show signup form
+app.get('/signupform', async function (req, res) {
+  try {
+    const businessArray = await Model.getAllBusinesses();
+
+    res.render('main_page', {
+      businesses: businessArray,
+      showSignupForm: true,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// Show login form
+app.get('/loginform', async function (req, res) {
+  try {
+    const businessArray = await Model.getAllBusinesses();
+
+    res.render('main_page', {
+      businesses: businessArray,
+      showLoginForm: true,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// Show business info for update
+app.get('/updateform', async function (req, res) {
+  try {
+    // Get business info for logged-in user
+    const businessArray = await Model.getAllBusinesses();
+
+    // For regular requests, render the page with the modal showing
+    res.render('main_page', {
+      businesses: businessArray,
+      showUpdateForm: true,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// Change password form
+app.get('/passwordform', async function (req, res) {
+  try {
+    const businessArray = await Model.getAllBusinesses();
+
+    res.render('main_page', {
+      businesses: businessArray,
+      showPasswordForm: true,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // Business user signup
 app.post('/signup', async function (req, res) {
   console.log('Received form data:', req.body);
