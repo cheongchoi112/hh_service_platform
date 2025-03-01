@@ -34,8 +34,11 @@ async function loginBusinessUser(userName, password) {
 
   return user;
 }
+
 // Business User Change Password: Updates the password in the user table
-async function changePassword() {}
+async function changePassword(userId, newPassword) {
+  await db.run('UPDATE User SET password = ? WHERE user_id = ?', [newPassword, userId]);
+}
 
 // Show Business Info for Update: Retrieves business information
 async function getBusinessInfo() {}

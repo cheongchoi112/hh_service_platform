@@ -163,6 +163,17 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
+// Change password
+app.post('/changepassword', async function (req, res) {
+  try {
+    await Model.changePassword(global.userId, req.body.newPassword);
+
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // catch-all router case intended for static files
 app.get(/^(.+)$/, function (req, res) {
   res.sendFile(__dirname + req.params[0]);
