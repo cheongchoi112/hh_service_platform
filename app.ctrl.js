@@ -156,6 +156,13 @@ app.get('/delete', async function (req, res) {
   }
 });
 
+// Logout
+app.get('/logout', function (req, res) {
+  global.userId = null;
+
+  res.redirect('/');
+});
+
 // catch-all router case intended for static files
 app.get(/^(.+)$/, function (req, res) {
   res.sendFile(__dirname + req.params[0]);

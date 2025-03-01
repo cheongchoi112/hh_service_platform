@@ -31,16 +31,18 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                  {{#userId}}
-                  <li class="nav-item">
-                    <span class="nav-link text-primary">Hi, User ID: {{ userId }}</span>
-                  </li>
-                  {{/userId}}
+                  {{^userId}}
+
                   <li class="nav-item">
                     <a class="nav-link" href="/loginform"> Login </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/signupform"> Sign Up </a>
+                  </li>
+                  {{/userId}}
+                  {{#userId}}
+                  <li class="nav-item">
+                    <span class="nav-link text-primary">Hi, User ID: {{ userId }}</span>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/updateform"> Update Profile </a>
@@ -58,8 +60,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#"> Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                   </li>
+                  {{/userId}}
                 </ul>
               </div>
             </div>
