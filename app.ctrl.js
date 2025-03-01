@@ -143,6 +143,19 @@ app.post('/update', async function (req, res) {
   }
 });
 
+// Delete account
+app.get('/delete', async function (req, res) {
+  try {
+    await Model.deleteBusinessAccount(global.userId);
+
+    global.userId = null;
+
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // catch-all router case intended for static files
 app.get(/^(.+)$/, function (req, res) {
   res.sendFile(__dirname + req.params[0]);

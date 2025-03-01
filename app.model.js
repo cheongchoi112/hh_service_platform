@@ -52,7 +52,11 @@ async function updateBusinessInfo(userId, businessName, phone, email, price) {
 }
 
 // Business User Delete Account: Deletes the business account
-async function deleteBusinessAccount() {}
+async function deleteBusinessAccount(userId) {
+  await db.run('DELETE FROM Business WHERE user_id = ?', [userId]);
+
+  await db.run('DELETE FROM User WHERE user_id = ?', [userId]);
+}
 
 // List All Businesses: Retrieves all registered businesses
 async function getAllBusinesses() {
