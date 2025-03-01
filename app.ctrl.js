@@ -72,12 +72,14 @@ app.get('/updateform', async function (req, res) {
   try {
     // Get business info for logged-in user
     const businessArray = await Model.getAllBusinesses();
+    const businessInfo = await Model.getBusinessInfo(global.userId);
 
     // For regular requests, render the page with the modal showing
     res.render('main_page', {
       businesses: businessArray,
       showUpdateForm: true,
       userId: global.userId,
+      updateData: businessInfo,
     });
   } catch (error) {
     console.error(error);

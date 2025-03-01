@@ -41,7 +41,14 @@ async function changePassword(userId, newPassword) {
 }
 
 // Show Business Info for Update: Retrieves business information
-async function getBusinessInfo() {}
+async function getBusinessInfo(userId) {
+  const businessInfo = await db.get(
+    'SELECT b.* FROM Business b JOIN User u ON b.user_id = u.user_id WHERE u.user_id = ?',
+    [userId]
+  );
+
+  return businessInfo;
+}
 
 // Business User Update Business Info: Updates business profile
 async function updateBusinessInfo(userId, businessName, phone, email, price) {
