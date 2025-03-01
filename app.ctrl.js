@@ -77,6 +77,7 @@ app.get('/updateform', async function (req, res) {
     res.render('main_page', {
       businesses: businessArray,
       showUpdateForm: true,
+      userId: global.userId,
     });
   } catch (error) {
     console.error(error);
@@ -118,6 +119,23 @@ app.post('/login', async function (req, res) {
     const user = await Model.loginBusinessUser(req.body.userName, req.body.password);
 
     global.userId = user.user_id;
+
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// Update business info
+app.post('/update', async function (req, res) {
+  try {
+    await Model.updateBusinessInfo(
+      req.body.userId,
+      req.body.businessName,
+      req.body.phone,
+      req.body.email,
+      parseInt(req.body.price)
+    );
 
     res.redirect('/');
   } catch (error) {

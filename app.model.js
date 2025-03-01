@@ -41,7 +41,15 @@ async function changePassword() {}
 async function getBusinessInfo() {}
 
 // Business User Update Business Info: Updates business profile
-async function updateBusinessInfo() {}
+async function updateBusinessInfo(userId, businessName, phone, email, price) {
+  await db.run('UPDATE Business SET business_name=?, phone=?, email=?, price=? WHERE user_id=?', [
+    businessName,
+    phone,
+    email,
+    price,
+    userId,
+  ]);
+}
 
 // Business User Delete Account: Deletes the business account
 async function deleteBusinessAccount() {}
