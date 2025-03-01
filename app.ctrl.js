@@ -94,6 +94,7 @@ app.get('/passwordform', async function (req, res) {
     res.render('main_page', {
       businesses: businessArray,
       showPasswordForm: true,
+      userId: global.userId,
     });
   } catch (error) {
     console.error(error);
