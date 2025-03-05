@@ -177,6 +177,28 @@ app.post('/changepassword', async function (req, res) {
   }
 });
 
+// Business search by price
+app.get('/search', async function (req, res) {
+  try {
+    const maxPrice = req.query.maxPrice;
+    let businessArray;
+
+    if (maxPrice && !isNaN(maxPrice)) {
+      businessArray = await Model.searchBusinessByPrice(maxPrice);
+    } else {
+      businessArray = await Model.getAllBusinesses();
+    }
+
+    res.render('main_page', {
+      businesses: businessArray,
+      searchPrice: maxPrice,
+      userId: global.userId,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // catch-all router case intended for static files
 app.get(/^(.+)$/, function (req, res) {
   res.sendFile(__dirname + req.params[0]);

@@ -75,7 +75,14 @@ async function getAllBusinesses() {
   return businesses;
 }
 // Car Owner Search by Price: Searches businesses by price
-async function searchBusinessByPrice() {}
+async function searchBusinessByPrice(maxPrice) {
+  const businesses = await db.all(
+    'SELECT b.* FROM Business b JOIN User u ON b.user_id = u.user_id WHERE b.price <= ?',
+    [maxPrice]
+  );
+
+  return businesses;
+}
 
 module.exports = {
   makeConnection,
