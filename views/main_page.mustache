@@ -13,18 +13,25 @@
       rel="stylesheet"
       type="text/css"
     />
+    <style>
+      @media (max-width: 768px) {
+        .logo-container {
+          display: none !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <div class="row my-3">
         <div class="col-12">
           <!-- Logo and header -->
-          <div class="d-flex justify-content-center mb-3">
+          <div class="d-flex justify-content-center mb-3 logo-container">
             <img src="../logo.jpg" alt="Tire Change Service Logo" style="max-width: 100px" />
           </div>
           <h1 class="text-center mb-4">Hamilton Home Tire Change Service</h1>
           <!-- Navigation bar -->
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
