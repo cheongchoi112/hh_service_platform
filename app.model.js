@@ -35,6 +35,13 @@ async function loginBusinessUser(userName, password) {
   return user;
 }
 
+// Get user info
+async function GetUserInfo(userName) {
+  const user = await db.get('SELECT * FROM User WHERE user_name = ?', [userName]);
+
+  return user;
+}
+
 // Business User Change Password: Updates the password in the user table
 async function changePassword(userId, newPassword) {
   await db.run('UPDATE User SET password = ? WHERE user_id = ?', [newPassword, userId]);
@@ -94,4 +101,5 @@ module.exports = {
   deleteBusinessAccount,
   getAllBusinesses,
   searchBusinessByPrice,
+  GetUserInfo,
 };

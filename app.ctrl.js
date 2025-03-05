@@ -103,7 +103,38 @@ app.get('/passwordform', async function (req, res) {
 
 // Business user signup
 app.post('/signup', async function (req, res) {
-  console.log('Received form data:', req.body);
+  let errors = {};
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(req.body.email)) {
+    errors.email = 'Please enter a valid email address';
+  }
+
+  // Validate phone (digits only)
+  const phoneRegex = /^\d+$/;
+  if (!phoneRegex.test(req.body.phone)) {
+    errors.phone = 'Phone number must contain only digits';
+  }
+
+  // Check if username already exists
+  const existingUser = await Model.GetUserInfo(req.body.userName);
+
+  if (existingUser) {
+    errors.userName = 'Username already exists';
+  }
+
+  // validation errors exist
+  if (Object.keys(errors).length > 0) {
+    const businessArray = await Model.getAllBusinesses();
+    return res.render('main_page', {
+      businesses: businessArray,
+      signupData: req.body,
+      signupErrors: errors,
+      showSignupForm: true,
+    });
+  }
+
   const result = await Model.createBusinessUser(
     req.body.userName,
     req.body.password,
