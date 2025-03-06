@@ -1,6 +1,7 @@
 // include express
 const express = require('express');
 const app = express();
+const session = require('express-session');
 
 // include the mustache template engine for express
 const mustacheExpress = require('mustache-express');
@@ -9,6 +10,14 @@ const mustacheExpress = require('mustache-express');
 const Model = require('./app.model.js');
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: 'tire-change-secret',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // create database connection
 Model.makeConnection();
@@ -23,8 +32,6 @@ app.set('view engine', 'mustache');
 // files should have the extension filename.mustache
 app.set('views', __dirname + '/views');
 
-global.userId = null;
-
 app.get('/', async function (req, res) {
   console.log('GET /');
   try {
@@ -32,7 +39,7 @@ app.get('/', async function (req, res) {
 
     res.render('main_page', {
       businesses: businessArray,
-      userId: global.userId,
+      userId: req.session.userId,
     });
   } catch (error) {
     console.error(error);
@@ -72,13 +79,13 @@ app.get('/updateform', async function (req, res) {
   try {
     // Get business info for logged-in user
     const businessArray = await Model.getAllBusinesses();
-    const businessInfo = await Model.getBusinessInfo(global.userId);
+    const businessInfo = await Model.getBusinessInfo(req.session.userId);
 
     // For regular requests, render the page with the modal showing
     res.render('main_page', {
       businesses: businessArray,
       showUpdateForm: true,
-      userId: global.userId,
+      userId: req.session.userId,
       updateData: businessInfo,
     });
   } catch (error) {
@@ -94,7 +101,7 @@ app.get('/passwordform', async function (req, res) {
     res.render('main_page', {
       businesses: businessArray,
       showPasswordForm: true,
-      userId: global.userId,
+      userId: req.session.userId,
     });
   } catch (error) {
     console.error(error);
@@ -152,11 +159,11 @@ app.post('/login', async function (req, res) {
   try {
     const user = await Model.loginBusinessUser(req.body.userName, req.body.password);
 
-    global.userId = user.user_id;
-
+    req.session.userId = user.user_id;
     res.redirect('/');
   } catch (error) {
     console.error(error);
+    res.redirect('/loginform');
   }
 });
 
@@ -180,10 +187,9 @@ app.post('/update', async function (req, res) {
 // Delete account
 app.get('/delete', async function (req, res) {
   try {
-    await Model.deleteBusinessAccount(global.userId);
+    await Model.deleteBusinessAccount(req.session.userId);
 
-    global.userId = null;
-
+    req.session.destroy();
     res.redirect('/');
   } catch (error) {
     console.error(error);
@@ -192,15 +198,14 @@ app.get('/delete', async function (req, res) {
 
 // Logout
 app.get('/logout', function (req, res) {
-  global.userId = null;
-
+  req.session.destroy();
   res.redirect('/');
 });
 
 // Change password
 app.post('/changepassword', async function (req, res) {
   try {
-    await Model.changePassword(global.userId, req.body.newPassword);
+    await Model.changePassword(req.session.userId, req.body.newPassword);
 
     res.redirect('/');
   } catch (error) {
@@ -223,7 +228,7 @@ app.get('/search', async function (req, res) {
     res.render('main_page', {
       businesses: businessArray,
       searchPrice: maxPrice,
-      userId: global.userId,
+      userId: req.session.userId,
     });
   } catch (error) {
     console.error(error);
